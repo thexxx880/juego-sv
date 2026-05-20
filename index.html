@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>Panel Lz Protect</title>
+
+<meta name="theme-color" content="#000000">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,
+body{
+    width:100%;
+    min-height:100%;
+    background:#050505;
+    color:#fff;
+    font-family:Arial, Helvetica, sans-serif;
+    overflow-x:hidden;
+}
+
+body{
+    padding:20px;
+}
+
+.box{
+
+    width:100%;
+    max-width:850px;
+
+    margin:auto;
+
+    background:#101010;
+
+    border-radius:18px;
+
+    padding:25px;
+
+    border:1px solid rgba(255,215,0,.5);
+
+    box-shadow:
+    0 0 30px rgba(255,215,0,.15),
+    inset 0 0 15px rgba(255,215,0,.05);
+
+}
+
+h2{
+    text-align:center;
+    margin-bottom:20px;
+    color:#ffd700;
+    font-size:28px;
+}
+
+textarea,
+input{
+
+    width:100%;
+
+    background:#1a1a1a;
+
+    color:#fff;
+
+    border:none;
+
+    border-radius:12px;
+
+    padding:15px;
+
+    font-size:16px;
+
+    resize:none;
+
+    outline:none;
+
+    transition:.2s;
+
+    border:1px solid #333;
+}
+
+textarea:focus,
+input:focus{
+    border-color:#ffd700;
+    box-shadow:0 0 10px rgba(255,215,0,.25);
+}
+
+button{
+
+    width:100%;
+
+    margin-top:15px;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:linear-gradient(90deg,#ffd700,#ffae00);
+
+    color:#000;
+
+    font-weight:bold;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+button:hover{
+    transform:scale(1.01);
+}
+
+button:active{
+    transform:scale(.98);
+}
+
+#status{
+
+    margin-top:15px;
+
+    text-align:center;
+
+    font-size:14px;
+
+    color:#ccc;
+
+    min-height:20px;
+}
+
+#resultado{
+
+    margin-top:20px;
+
+    background:#181818;
+
+    border-radius:14px;
+
+    padding:15px;
+
+    overflow:hidden;
+
+    min-height:100px;
+
+    border:1px solid #333;
+}
+
+#resultado iframe{
+
+    width:100%;
+
+    height:75vh;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#000;
+}
+
+small{
+
+    display:block;
+
+    margin-top:15px;
+
+    text-align:center;
+
+    color:#888;
+
+    font-size:13px;
+
+    line-height:1.5;
+}
+
+.loader{
+
+    width:45px;
+    height:45px;
+
+    border:4px solid rgba(255,255,255,.1);
+
+    border-top:4px solid #ffd700;
+
+    border-radius:50%;
+
+    animation:spin 1s linear infinite;
+
+    margin:20px auto;
+}
+
+@keyframes spin{
+    100%{
+        transform:rotate(360deg);
+    }
+}
+
+@media(max-width:768px){
+
+    body{
+        padding:10px;
+    }
+
+    .box{
+        padding:18px;
+    }
+
+    h2{
+        font-size:22px;
+    }
+
+    button{
+        font-size:16px;
+        padding:14px;
+    }
+
+    textarea{
+        font-size:15px;
+    }
+
+    #resultado iframe{
+        height:65vh;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="box">
+
+    <h2>🔐 Panel Lz Protect</h2>
+
+    <textarea
+    id="url"
+    rows="4"
+    placeholder="Pega aquí tu enlace...">
+    </textarea>
+
+    <button id="btnGenerar">
+        🚀 Generar Página Limpia
+    </button>
+
+    <div id="status"></div>
+
+    <div id="resultado"></div>
+
+    <small>
+        Reproductor limpio • Anti Ads • Anti Popups • Fullscreen • Compatible con múltiples hosts
+    </small>
+
+</div>
+
+<script>
+
+document.getElementById("btnGenerar")
+.addEventListener("click", function(){
+
+    if (typeof generar === "function"){
+
+        generar();
+
+    } else {
+
+        const status = document.getElementById("status");
+
+        status.innerHTML =
+        "❌ No se encontró ads.js";
+
+    }
+
+});
+
+</script>
+
+<script src="ads.js"></script>
+
+</body>
+</html>
