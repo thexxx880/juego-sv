@@ -45,7 +45,6 @@ async function generar() {
 
     status.innerHTML = "🛡️ Creando caja segura...";
 
-    // === VERSIÓN LIMPIA Y ESTABLE ===
     const cleanHTML = `<!DOCTYPE html>
 <html lang="es">
 <head>
@@ -63,7 +62,6 @@ html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;background:#
 
 <script>
 (function(){
-    // Anti popups
     window.open = () => false;
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.getRegistrations().then(r => r.forEach(reg => reg.unregister()));
@@ -71,7 +69,6 @@ html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;background:#
 
     const glass = document.getElementById('glassBox');
 
-    // Permitir clics SOLO en el reproductor de video
     function isVideoArea(target) {
         return target.tagName === 'VIDEO' || 
                target.closest('video') || 
@@ -99,7 +96,6 @@ html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;background:#
         }, true);
     });
 
-    // Bloquear enlaces
     document.addEventListener('click', function(e) {
         if (e.target.tagName === 'A' || e.target.closest('a')) {
             e.preventDefault();
@@ -107,7 +103,7 @@ html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;background:#
         }
     }, true);
 
-    console.log('%c[SafeBox] Caja transparente activada correctamente', 'color:#0f0');
+    console.log('%c[SafeBox] Caja transparente activada', 'color:#0f0');
 })();
 <\/script>
 </body>
@@ -116,13 +112,14 @@ html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;background:#
     const base64 = btoa(unescape(encodeURIComponent(cleanHTML)));
     const dataUrl = "data:text/html;base64," + base64;
 
+    // === AQUÍ QUITAMOS EL SANDBOX ===
     resultado.innerHTML = `
-        <iframe sandbox="allow-same-origin allow-scripts" allowfullscreen src="${dataUrl}" style="width:100%;height:85vh;border:none;border-radius:12px;background:#000"></iframe>
+        <iframe allowfullscreen src="${dataUrl}" style="width:100%;height:85vh;border:none;border-radius:12px;background:#000"></iframe>
         <br><br>
         <button onclick="navigator.clipboard.writeText('${dataUrl}')" style="padding:13px 26px;background:#111;color:#0f0;border:2px solid #0f0;border-radius:10px;cursor:pointer">
             📋 Copiar Enlace Seguro
         </button>
-        <p style="color:#888;font-size:13px;margin-top:10px">Puedes reproducir el video. Los clics fuera del reproductor están bloqueados.</p>
+        <p style="color:#888;font-size:13px;margin-top:10px">Puedes reproducir el video normalmente. Los clics fuera del reproductor están bloqueados.</p>
     `;
     status.innerHTML = `<span style="color:lime">✅ Modo Seguro activado</span>`;
 }
