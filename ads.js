@@ -1,5 +1,5 @@
 // =========================
-// LISTA DE PROXIES
+// LISTA DE PROXIES (actualizada)
 // =========================
 const proxies = [
     "https://proxy.killcors.com/?url=",
@@ -20,7 +20,7 @@ async function fetchConProxies(url) {
             });
             if (res.ok) {
                 const text = await res.text();
-                if (text.length > 600) return text;
+                if (text.length > 500) return text;
             }
         } catch(e){}
     }
@@ -35,15 +35,15 @@ async function generar() {
     if (!urlInput) return alert("❌ URL inválida");
 
     resultado.innerHTML = "";
-    status.innerHTML = "🔄 Cargando página...";
+    status.innerHTML = "🔄 Intentando cargar...";
 
     const html = await fetchConProxies(urlInput);
     if (!html) {
-        status.innerHTML = "❌ No se pudo cargar la página";
+        status.innerHTML = "❌ Todos los proxies fallaron. Este sitio es muy protegido.";
         return;
     }
 
-    status.innerHTML = "🛡️ Creando caja segura...";
+    status.innerHTML = "🛡️ Creando modo seguro...";
 
     const cleanHTML = `<!DOCTYPE html>
 <html lang="es">
@@ -112,14 +112,13 @@ html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;background:#
     const base64 = btoa(unescape(encodeURIComponent(cleanHTML)));
     const dataUrl = "data:text/html;base64," + base64;
 
-    // === AQUÍ QUITAMOS EL SANDBOX ===
     resultado.innerHTML = `
         <iframe allowfullscreen src="${dataUrl}" style="width:100%;height:85vh;border:none;border-radius:12px;background:#000"></iframe>
         <br><br>
         <button onclick="navigator.clipboard.writeText('${dataUrl}')" style="padding:13px 26px;background:#111;color:#0f0;border:2px solid #0f0;border-radius:10px;cursor:pointer">
             📋 Copiar Enlace Seguro
         </button>
-        <p style="color:#888;font-size:13px;margin-top:10px">Puedes reproducir el video normalmente. Los clics fuera del reproductor están bloqueados.</p>
+        <p style="color:#888;font-size:13px;margin-top:10px">Este sitio es muy protegido. Si no carga el video, prueba con otro enlace.</p>
     `;
     status.innerHTML = `<span style="color:lime">✅ Modo Seguro activado</span>`;
 }
